@@ -1,7 +1,6 @@
 #DNSmap - Subdomain & Reverse DNS Resolver
 
-**Author:** m4lw4r2  
-GitHub:github.com/m4lw4r2
+Author: m4lw4r2  
 
 DNSmap is a fast multithreaded Python tool for subdomain enumeration with optional reverse DNS (PTR) lookup support.  
 Ideal for use onME.md faylı (Android) or Pydroid platforms.
