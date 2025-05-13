@@ -44,12 +44,17 @@ def check_subdomain(subdomain, do_reverse):
 # Smart thread count
 def get_optimal_threads():
     cpu_count = multiprocessing.cpu_count()
-    return cpu_count * 5  # For example, 4 CPU cores * 5 = 20 threads
+    return cpu_count * 5
 
 # Main function
 def main():
     banner()
+    
     domain = input("Enter target domain (e.g. example.com): ").strip()
+    if domain == "":
+        print("[!] Error: Domain name cannot be empty.")
+        return
+
     wordlist_path = "/storage/emulated/0/Download/wordlist.txt"
     output_file = "/storage/emulated/0/Download/results.txt"
 
@@ -57,7 +62,6 @@ def main():
         print(f"[!] Wordlist not found: {wordlist_path}")
         return
 
-    # Thread input AFTER domain
     try:
         user_input = input("Thread count (e.g. 10, press Enter for auto): ").strip()
         if user_input == "":
@@ -65,20 +69,25 @@ def main():
             print(f"[*] Auto-selected optimal thread count: {threads}")
         else:
             threads = int(user_input)
+            if threads <= 0:
+                print("[!] Error: Thread count must be greater than 0.")
+                return
             if threads > 100:
-                print("[!] Warning: More than 100 threads may freeze device or get DNS blocked.")
-    except:
-        threads = get_optimal_threads()
-        print(f"[*] Invalid input. Auto-selected thread count: {threads}")
+                print("[!] Warning: More than 100 threads may freeze device or cause DNS blocking.")
+    except ValueError:
+        print("[!] Error: Invalid thread count. Must be a number.")
+        return
 
     reverse_input = input("Enable reverse DNS lookup? (yes/no): ").strip().lower()
+    if reverse_input not in ["yes", "no"]:
+        print("[!] Error: Please enter 'yes' or 'no'.")
+        return
     do_reverse = True if reverse_input == "yes" else False
 
     with open(wordlist_path, "r") as f:
         words = f.read().splitlines()
 
     subdomains = [f"{word.strip()}.{domain}" for word in words if word.strip()]
-
     print(f"\n[✓] {len(subdomains)} subdomains will be checked...\n")
 
     results = []
