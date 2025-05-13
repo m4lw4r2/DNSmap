@@ -12,8 +12,6 @@ Ideal for use onME.md faylı (Android) or Pydroid platforms.
 
 - Subdomain resolution with A record lookup
 - Optional reverse DNS (PTR) record lookup
-- Smart thread management based on CPU count
-- Clean terminal output with colorful banner
 - Wordlist customizable (TXT format)
 
 ---
