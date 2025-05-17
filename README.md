@@ -19,6 +19,7 @@ DNSmap is a fast multithreaded Python tool for subdomain enumeration with option
 ### 1. Clone the repository
 
 git clone https://github.com/m4lw4r2/dnsmap.git
+
 cd dnsmap
 
 2. Install required modules
